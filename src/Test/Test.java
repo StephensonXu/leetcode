@@ -256,8 +256,9 @@ public class Test {
 //		i^=256;
 //		System.out.print(x);
 		Solution arr=new Solution();
-		int[] nums={1,1,1,2,2,2};
-		System.out.print(arr.removeDuplicates2(nums));
+		int[] nums={1,2,5};
+		leetcode z=new leetcode();
+		System.out.print(z.change(5, nums));
 	}
 
 }

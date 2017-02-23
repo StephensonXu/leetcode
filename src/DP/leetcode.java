@@ -1,5 +1,7 @@
 package DP;
 
+import java.util.Arrays;
+
 public class leetcode {
 	//时间过长
     public boolean canCross(int[] stones) {
@@ -235,5 +237,54 @@ public class leetcode {
         }
         return true;
     }
+    public int change(int amount, int[] coins) {
+        /*
+    	Arrays.sort(coins);
+        //res[i]=res[i-coins[0]]+res[i-coins[1]]+...//重复
+    	//res[i][j]表示用前i种硬币组成总量j的种数=res[i-1][j-coins[i]*0]+res[i][j-coins[j]*1]....
+        int[][] res=new int[coins.length+1][amount+1];
+        //init
+        for(int i=0;i<=amount;i++){
+        	res[0][i]=0;
+        }
+        for(int i=0;i<=coins.length;i++){
+        	res[i][0]=1;
+        }
+        
+        for(int i=1;i<=coins.length;i++){
+        	for(int j=1;j<=amount;j++){
+        		int counts=0;
+        		while(j-coins[i-1]*counts>=0){
+        			res[i][j]+=res[i-1][j-coins[i-1]*(counts++)];
+        		}
+        	}
+        }
+        return res[coins.length][amount];
+        */
+        //better
+    	Arrays.sort(coins);
+    	int[] res=new int[amount+1];
+    	res[0]=1;
+    	for(int coin:coins){
+    		for(int j=coin;j<=amount;j++){
+    			res[j]+=res[j-coin];
+    		}
+    	}
+    	return res[amount];
+    }
+    /*
+    public int countWays(int n) {  
+        // write code here  
+        int[] coins={1,2,5};  
+        int[] dp= {0,0,0,0,0,0};         
+        dp[0] = 1;  
+        for(int i = 0;i < 3;++i){  
+            for(int j = coins[i];j <= n;++j){  
+                dp[j] =(dp[j]+dp[j-coins[i]])%1000000007;                 
+            }  
+        }  
+        return dp[n];  
+    }  
+    */
 
 }
